@@ -8,7 +8,8 @@
 {% block conteudo %}
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <a style="margin-top:50px; margin-bottom:10px" href="{% url 'createBook' %}" class="btn btn-success btn-block">Insert Book</a>
+            <a style="margin-top:50px; margin-bottom:10px" href="{% url 'logoutUser' %}" class="btn btn-warning btn-block">Logout [{{request.user.first_name}}]</a>
+            <a style="margin-bottom:10px" href="{% url 'createBook' %}" class="btn btn-success btn-block">Insert Book</a>
             <table class="table table-striped table-dark">
                 <thead>
                   <tr>

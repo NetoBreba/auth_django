@@ -6,7 +6,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from book.forms import BookForm
 from book.models import Book
 
+""" 
+imports auth
+"""
+from django.contrib.auth.decorators import permission_required, login_required
+
 # Create your views here.
+@login_required()
+@permission_required('book.add_book')
 def createBook(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -22,11 +29,15 @@ def createBook(request):
     context = {'form': form}
     return render(request, 'book/create.html', context=context)
 
+@login_required()
+@permission_required('book.add_book')
 def getAllBooks(request):
     books = Book.objects.all()
     context = {'books': books}
     return render(request, 'book/books.html', context=context)
 
+@login_required()
+@permission_required('book.add_book')
 def updateBook(request, idBook):
     try:
         book = Book.objects.get(pk=idBook)
@@ -48,6 +59,8 @@ def updateBook(request, idBook):
     context = {'form': form, 'book': book}
     return render(request, 'book/update.html', context=context)
 
+@login_required()
+@permission_required('book.delete_book')
 def deleteBook(request, idBook):
     try:
         book = Book.objects.get(pk=idBook)
@@ -58,7 +71,9 @@ def deleteBook(request, idBook):
         #messages.error(request, 'book does not exist')
 
     return HttpResponseRedirect(reverse('getAllBooks'))
-    
+
+@login_required()
+@permission_required('book.add_book')
 def getBook(request, idBook):
     try:
         book = Book.objects.get(pk=idBook)
