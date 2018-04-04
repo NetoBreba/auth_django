@@ -124,7 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 """"
 redirect url to unauthorized user
 """

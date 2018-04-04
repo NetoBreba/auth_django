@@ -27,8 +27,12 @@
                         <td>{{book.title}}</td>
                         <td>{{book.publishDate}}</td>
                         <td>{{book.edition}}</td>
+                        {% if 'book.update_book' in request.user.get_all_permissions %}
                         <td><a href="{% url 'updateBook' book.id %}" class="btn btn-primary">Update</a></td>
+                        {% endif %}
+                        {% if 'book.delete_book' in request.user.get_all_permissions %}
                         <td><a href="{% url 'deleteBook' book.id %}" class="btn btn-danger">Delete</a></td>
+                        {% endif %}
                     </tr>
                     {%endfor%}
                 </tbody>
